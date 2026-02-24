@@ -22,8 +22,8 @@ function App() {
   return (
     <div className='flex  w-full min-h-screen bg-slate-800'>
         <SideBar onAdd={addNotes}/>
-        <NoteList notes={notes}/>
-        <Editor />
+        <NoteList notes={notes} selectedNote={selectedNote}/>
+        <Editor selectedNote={selectedNote}/>
     </div>
   )
 }
