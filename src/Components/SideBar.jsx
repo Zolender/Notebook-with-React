@@ -2,10 +2,10 @@ import { Clock3, NotebookText, PencilLine, Star, Trash2 } from "lucide-react";
 
 const SideBar = ({onAdd}) => {
 
-    
+
     return (
         <div className="w-64 border-r-2 border-slate-400 flex flex-col gap-5 justify-start items-center py-5 px-5">
-            <button type="button" className="flex justify-center items-center w-full text-center py-1 bg-blue-600 hover:bg-blue-700 active:bg-blue-900 hover:cursor-pointer rounded-lg border-none focus:outline-none transition-colors text-slate-100">
+            <button onClick={onAdd} type="button" className="flex justify-center items-center w-full text-center py-1 bg-blue-600 hover:bg-blue-700 active:bg-blue-900 hover:cursor-pointer rounded-lg border-none focus:outline-none transition-colors text-slate-100">
                 <PencilLine size={22} className="mx-3"/>
                 New Note
             </button>

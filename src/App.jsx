@@ -10,12 +10,12 @@ function App() {
   function addNotes(){
     const newNote = {
       id: Date.now(),
-      titel: "Untitled Note",
+      title: "Untitled Note",
       body: '',
       lastModified: Date.now()
     }
 
-    setNotes([newNotes, ...notes])
+    setNotes([newNote, ...notes])
     setSelectedNoteID(newNote.id)
   }
 
@@ -27,7 +27,7 @@ function App() {
     <div className='flex  w-full min-h-screen bg-slate-800'>
         <SideBar onAdd={addNotes}/>
         <NoteList notes={notes} selectedNoteID={selectedNoteID} setSelectedNoteID={setSelectedNoteID} />
-        <Editor selectedNote={getSelectedNote}/>
+        <Editor selectedNote={getSelectedNote()}/>
     </div>
   )
 }

@@ -10,11 +10,20 @@ const NoteList = ({setSelectedNoteID, notes, selectedNoteID}) => {
                 <Search size={22} className="" />
                 <input type="text" value={'Search notes...'} className="border-none px-3 py-1 outline-none"/>
             </div>
-            <div className="flex gap-2 justify-center items-center w-full">
+            {notes.length===0 && <div className="flex gap-2 justify-center items-center w-full">
                 <Wind size={22} />
                 No notes yet...
+            </div>}
+            {notes.map((note) =>(
+                <div className={`p-3 rounded-md cursor-pointer transition-all ${note.id === activeNoteId ? 'bg-slate-700' : 'hover:bg-slate-800'}`}
+                        key={note.id}
+                        onClick={()=> setSelectedNoteID(note.id)}
+                >
+                    <p className="font-bold truncate">note.title</p>
+                    <p className="truncate text-slate-300 text-sm">{note.body || 'No content...'}</p>
+
                 </div>
-            
+            ))}
         </div>
     );
 }
