@@ -17,7 +17,7 @@ const Editor = ({selectedNote, onUpdateNote, onDeleteNote}) => {
         return (
             <main className="flex-1 flex flex-col bg-slate-900 overflow-hidden">
                 <div className="flex items-center justify-between p-4 border-b border-slate-700">
-                    <span className="text-xs text-slate-400 uppercase tracking-widest">Last edited: some date keda</span>
+                    <span className="text-xs text-slate-400 uppercase tracking-widest">Last edited: {new Date(selectedNote.lastModified).toLocaleString()}</span>
                     <div className="flex gap-4 text-slate-400">
                         <Share2 size={22} className="hover:cursor-pointer" />
                         <Star size={22} className="hover:cursor-pointer"/>
