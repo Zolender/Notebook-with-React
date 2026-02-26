@@ -10,9 +10,9 @@ const NoteList = ({setSelectedNoteID, notes, selectedNoteID, searchQuery, setSea
                 <Search size={22} className="" />
                 <input type="text" placeholder={'Search notes...'} value={searchQuery} onChange={(e)=> setSearchQuery(e.target.value)} className="border-none px-3 py-1 outline-none"/>
             </div>
-            {notes.length===0 && <div className="flex gap-2 justify-center items-center w-full">
+            {notes.length===0 && <div className="flex gap-2 justify-center items-center w-full italic">
                 <Wind size={22} />
-                No notes yet...
+                {!searchQuery? "No notes yet...": "No match found."}
             </div>}
             {notes.map((note) =>(
                 <div className={`p-3 rounded-md cursor-pointer w-full transition-all ${note.id === selectedNoteID ? 'bg-slate-700' : 'hover:bg-slate-800'}`}
