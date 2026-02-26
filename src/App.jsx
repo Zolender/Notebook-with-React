@@ -5,7 +5,7 @@ import Editor from './Components/Editor'
 
 function App() {
   const [notes, setNotes] = useState([])
-  const [selectedNote, setSelectedNote] = useState(null)
+  const [selectedNoteID, setSelectedNoteID] = useState(null)
 
   function addNotes(){
     const newNote = {
@@ -16,14 +16,18 @@ function App() {
     }
 
     setNotes([newNotes, ...notes])
-    setSelectedNote(newNote.id)
+    setSelectedNoteID(newNote.id)
+  }
+
+  function getSelectedNote(){
+      return notes.find(note=> note.id ===  selectedNoteID)
   }
 
   return (
     <div className='flex  w-full min-h-screen bg-slate-800'>
         <SideBar onAdd={addNotes}/>
-        <NoteList notes={notes} selectedNote={selectedNote}/>
-        <Editor selectedNote={selectedNote}/>
+        <NoteList notes={notes} selectedNoteID={selectedNoteID} setSelectedNoteID={setSelectedNoteID} />
+        <Editor selectedNote={getSelectedNote}/>
     </div>
   )
 }

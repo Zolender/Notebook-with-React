@@ -1,7 +1,8 @@
-import { Search, Wind } from "lucide-react";
+import {  Search, Wind } from "lucide-react";
 
-const NoteList = ({selectedNote, notes}) => {
-    
+
+const NoteList = ({setSelectedNoteID, notes, selectedNoteID}) => {
+
     return (
         <div className="flex flex-col items-start w-72 px-3 py-5 gap-5 border-r-2 border-slate-400 text-slate-100">
             <p className="text-xl font-bold">All Notes</p>
