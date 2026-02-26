@@ -15,7 +15,7 @@ const NoteList = ({setSelectedNoteID, notes, selectedNoteID}) => {
                 No notes yet...
             </div>}
             {notes.map((note) =>(
-                <div className={`p-3 rounded-md cursor-pointer transition-all ${note.id === activeNoteId ? 'bg-slate-700' : 'hover:bg-slate-800'}`}
+                <div className={`p-3 rounded-md cursor-pointer w-full transition-all ${note.id === selectedNoteID ? 'bg-slate-700' : 'hover:bg-slate-800'}`}
                         key={note.id}
                         onClick={()=> setSelectedNoteID(note.id)}
                 >

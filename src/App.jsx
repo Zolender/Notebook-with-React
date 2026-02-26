@@ -6,6 +6,7 @@ import Editor from './Components/Editor'
 function App() {
   const [notes, setNotes] = useState([])
   const [selectedNoteID, setSelectedNoteID] = useState(null)
+  
 
   function addNotes(){
     const newNote = {
@@ -19,6 +20,15 @@ function App() {
     setSelectedNoteID(newNote.id)
   }
 
+  function onUpdateNote(updatedNote){
+    const updatedNoteArr = notes.map(note=>{
+      if(note.id == updatedNote.id)return updatedNote
+
+      return note
+    })
+    setNotes(updatedNoteArr)
+  }
+
   function getSelectedNote(){
       return notes.find(note=> note.id ===  selectedNoteID)
   }
@@ -27,7 +37,7 @@ function App() {
     <div className='flex  w-full min-h-screen bg-slate-800'>
         <SideBar onAdd={addNotes}/>
         <NoteList notes={notes} selectedNoteID={selectedNoteID} setSelectedNoteID={setSelectedNoteID} />
-        <Editor selectedNote={getSelectedNote()}/>
+        <Editor selectedNote={getSelectedNote()} onUpdateNote={onUpdateNote}/>
     </div>
   )
 }
