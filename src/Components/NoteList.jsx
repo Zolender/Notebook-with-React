@@ -19,7 +19,7 @@ const NoteList = ({setSelectedNoteID, notes, selectedNoteID}) => {
                         key={note.id}
                         onClick={()=> setSelectedNoteID(note.id)}
                 >
-                    <p className="font-bold truncate">note.title</p>
+                    <p className="font-bold truncate">{note.title}</p>
                     <p className="truncate text-slate-300 text-sm">{note.body || 'No content...'}</p>
 
                 </div>
