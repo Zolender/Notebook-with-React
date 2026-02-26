@@ -6,6 +6,7 @@ import Editor from './Components/Editor'
 function App() {
   const [notes, setNotes] = useState(JSON.parse(localStorage.getItem('notes')) || [])
   const [selectedNoteID, setSelectedNoteID] = useState(null)
+  const [searchQuery, setSearchQuery] =  useState('')
 
   useEffect(()=>{
     localStorage.setItem('notes', JSON.stringify(notes))
@@ -47,10 +48,15 @@ function App() {
     }
   }
 
+
+  const filteredNotes = notes.filter(note =>(
+    note.title.toLowerCase().includes(searchQuery.toLowerCase()) || note.body.toLowerCase().includes(searchQuery.toLowerCase())
+  ))
+
   return (
     <div className='flex  w-full min-h-screen bg-slate-800'>
         <SideBar onAdd={addNotes}/>
-        <NoteList notes={notes} selectedNoteID={selectedNoteID} setSelectedNoteID={setSelectedNoteID} />
+        <NoteList notes={filteredNotes} searchQuery={searchQuery} setSearchQuery={setSearchQuery} selectedNoteID={selectedNoteID} setSelectedNoteID={setSelectedNoteID} />
         <Editor selectedNote={getSelectedNote()} onUpdateNote={onUpdateNote} onDeleteNote={onDeleteNote} />
     </div>
   )
