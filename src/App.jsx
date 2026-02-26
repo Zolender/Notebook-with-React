@@ -1,11 +1,15 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import SideBar from './Components/SideBar'
 import NoteList from './Components/NoteList'
 import Editor from './Components/Editor'
 
 function App() {
-  const [notes, setNotes] = useState([])
+  const [notes, setNotes] = useState(JSON.parse(localStorage.getItem('notes')) || [])
   const [selectedNoteID, setSelectedNoteID] = useState(null)
+
+  useEffect(()=>{
+    localStorage.setItem('notes', JSON.stringify(notes))
+  },[notes])
   
 
   function addNotes(){
