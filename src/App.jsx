@@ -18,11 +18,16 @@ function App() {
       id: Date.now(),
       title: "Untitled Note",
       body: '',
+      isFavorite: false,
       lastModified: Date.now()
     }
 
     setNotes([newNote, ...notes])
     setSelectedNoteID(newNote.id)
+  }
+
+  function onToggleFavorite(id){
+    setNotes(notes.map(note=> note.id === id? {...note, isFavorite: !note.isFavorite}: note))
   }
 
   function onUpdateNote(updatedNote){
