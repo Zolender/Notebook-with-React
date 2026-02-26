@@ -1,6 +1,6 @@
 import { Share2, Star, Trash2 } from "lucide-react";
 
-const Editor = ({selectedNote, onUpdateNote}) => {
+const Editor = ({selectedNote, onUpdateNote, onDeleteNote}) => {
 
     const editField = (field, value)=>{
         onUpdateNote({...selectedNote, [field]: value, lastModified: Date.now()})
@@ -21,7 +21,7 @@ const Editor = ({selectedNote, onUpdateNote}) => {
                     <div className="flex gap-4 text-slate-400">
                         <Share2 size={22} className="hover:cursor-pointer" />
                         <Star size={22} className="hover:cursor-pointer"/>
-                        <Trash2 size={22} className="hover:cursor-pointer"/>
+                        <Trash2 size={22} className="hover:cursor-pointer" onClick={()=> onDeleteNote(selectedNote.id)}/>
                     </div>
                 </div>
                 <div className="flex-1 flex flex-col p-8 md:p-12 max-w-4xl mx-auto w-full">

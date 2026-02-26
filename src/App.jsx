@@ -37,11 +37,21 @@ function App() {
       return notes.find(note=> note.id ===  selectedNoteID)
   }
 
+  function onDeleteNote(id){
+    const remainingNotes = notes.filter(note=> note.id!==id)
+
+    setNotes(remainingNotes)
+
+    if(id === selectedNoteID){
+      setSelectedNoteID(null)
+    }
+  }
+
   return (
     <div className='flex  w-full min-h-screen bg-slate-800'>
         <SideBar onAdd={addNotes}/>
         <NoteList notes={notes} selectedNoteID={selectedNoteID} setSelectedNoteID={setSelectedNoteID} />
-        <Editor selectedNote={getSelectedNote()} onUpdateNote={onUpdateNote}/>
+        <Editor selectedNote={getSelectedNote()} onUpdateNote={onUpdateNote} onDeleteNote={onDeleteNote} />
     </div>
   )
 }
