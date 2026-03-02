@@ -14,18 +14,6 @@ function App() {
     localStorage.setItem('notes', JSON.stringify(notes))
   },[notes])
 
-  useEffect(()=>{
-    const cleanedNotes = notes.filter((note)=>{
-      const isCurrentNote = note.id === selectedNoteID
-      const isEmpty = note.title.trim() === 'Untitled Note' && note.body.trim()=== ''
-
-      return isCurrentNote || !isEmpty
-      }
-    )
-    if(cleanedNotes.length!== notes.length){
-      setNotes(cleanedNotes)
-    }
-  }, [selectedNoteID])
   
 
   function addNotes(){
@@ -36,8 +24,11 @@ function App() {
       isFavorite: false,
       lastModified: Date.now()
     }
+    const cleanedNotes = notes.filter(note => 
+    note.title.trim() !== "Untitled Note" || note.body.trim() !== ""
+  );
 
-    setNotes([newNote, ...notes])
+    setNotes([newNote, ...cleanedNotes])
     setSelectedNoteID(newNote.id)
   }
 
