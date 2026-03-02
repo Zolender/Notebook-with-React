@@ -7,6 +7,8 @@ function App() {
   const [notes, setNotes] = useState(JSON.parse(localStorage.getItem('notes')) || [])
   const [selectedNoteID, setSelectedNoteID] = useState(null)
   const [searchQuery, setSearchQuery] =  useState('')
+  const [currentView, setCurrentView] = useState('all')
+  const [isSideBarExpanded, setIsSideBarExpanded] = useState(false)
 
   useEffect(()=>{
     localStorage.setItem('notes', JSON.stringify(notes))
@@ -60,7 +62,7 @@ function App() {
 
   return (
     <div className='flex  w-full min-h-screen bg-slate-800'>
-        <SideBar onAdd={addNotes}/>
+        <SideBar onAdd={addNotes} isSideBarExpanded={isSideBarExpanded} setIsSideBarExpanded={setIsSideBarExpanded} />
         <NoteList notes={filteredNotes} searchQuery={searchQuery} setSearchQuery={setSearchQuery} selectedNoteID={selectedNoteID} setSelectedNoteID={setSelectedNoteID} />
         <Editor selectedNote={getSelectedNote()} onUpdateNote={onUpdateNote} onDeleteNote={onDeleteNote} />
     </div>

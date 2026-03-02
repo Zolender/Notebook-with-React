@@ -1,10 +1,13 @@
-import { Clock3, NotebookText, PencilLine, Star, Trash2 } from "lucide-react";
+import { Clock3, Menu, NotebookText, PencilLine, Star, Trash2 } from "lucide-react";
 
-const SideBar = ({onAdd}) => {
+const SideBar = ({onAdd, setIsSideBarExpanded, isSideBarExpanded}) => {
 
 
     return (
-        <div className="w-64 border-r-2 border-slate-400 flex flex-col gap-5 justify-start items-center py-5 px-5">
+        <div className={`${isSideBarExpanded? 'w-64': 'w-20'} border-r-2 border-slate-400 flex flex-col gap-5 justify-start items-center py-5 px-5 transition-all duration-300`}>
+            <button type="button">
+                <Menu size={35} onClick={()=>setIsSideBarExpanded(!isSideBarExpanded)} className="p-2 hover:bg-slate-700 rounded-lg self-end mb-4 text-slate-300"/>
+            </button>
             <button onClick={onAdd} type="button" className="flex justify-center items-center w-full text-center py-1 bg-blue-600 hover:bg-blue-700 active:bg-blue-900 hover:cursor-pointer rounded-lg border-none focus:outline-none transition-colors text-slate-100">
                 <PencilLine size={22} className="mx-3"/>
                 New Note
