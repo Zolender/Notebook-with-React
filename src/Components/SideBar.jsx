@@ -18,25 +18,25 @@ const SideBar = ({onAdd, setIsSideBarExpanded, isSideBarExpanded, setCurrentView
                 {isSideBarExpanded&& <p className="mb-3">CATEGORIES</p>}
                 <p
                     onClick={() => setCurrentView('all')}
-                    className={` hover:text-slate-100 hover:cursor-pointer rounded-sm py-2 flex items-center gap-2 transition ${isSideBarExpanded? "pl-2 w-[70%] hover:bg-slate-500": ''}`}>
+                    className={` hover:text-slate-100 hover:cursor-pointer rounded-sm py-2 flex items-center gap-2 transition ${isSideBarExpanded? "pl-2 w-[70%] hover:bg-slate-500": ''} ${currentView === 'all' ? isSideBarExpanded? 'bg-slate-600 text-slate-100': 'text-slate-100' : 'hover:text-slate-100'}`}>
                     <NotebookText size={22}/>
                     {isSideBarExpanded && <span className="ml-3">All Notes</span>}
                 </p>
                 <p 
                     onClick={() => setCurrentView('favorites')}
-                    className={` hover:text-slate-100 hover:cursor-pointer rounded-sm py-2 flex items-center gap-2 transition ${isSideBarExpanded? "pl-2 w-[70%] hover:bg-slate-500": ''}`}>
+                    className={` hover:text-slate-100 hover:cursor-pointer rounded-sm py-2 flex items-center gap-2 transition ${isSideBarExpanded? "pl-2 w-[70%] hover:bg-slate-500": ''} ${currentView === 'favorites' ? isSideBarExpanded? 'bg-slate-600 text-slate-100': 'text-slate-100' : 'hover:text-slate-100'}`}>
                     <Star size={22}/>
                     {isSideBarExpanded && <span className="ml-3">Favorite</span>}
                 </p>
                 <p 
                     onClick={() => setCurrentView('recents')}
-                    className={` hover:text-slate-100 hover:cursor-pointer rounded-sm py-2 flex items-center gap-2 transition ${isSideBarExpanded? "pl-2 w-[70%] hover:bg-slate-500": ''}`}>
+                    className={` hover:text-slate-100 hover:cursor-pointer rounded-sm py-2 flex items-center gap-2 transition ${isSideBarExpanded? "pl-2 w-[70%] hover:bg-slate-500": ''} ${currentView === 'recents' ? isSideBarExpanded? 'bg-slate-600 text-slate-100': 'text-slate-100' : 'hover:text-slate-100'}`}>
                     <Clock3 size={22}/>
                     {isSideBarExpanded && <span className="ml-3">Recent</span>}
                 </p>
                 <p 
                     onClick={() => setCurrentView('deleted')}
-                    className={` hover:text-slate-100 hover:cursor-pointer rounded-sm py-2 flex items-center gap-2 transition ${isSideBarExpanded? "pl-2 w-[70%] hover:bg-slate-500": ''}`}>
+                    className={` hover:text-slate-100 hover:cursor-pointer rounded-sm py-2 flex items-center gap-2 transition ${isSideBarExpanded? "pl-2 w-[70%] hover:bg-slate-500": ''} ${currentView === 'deleted' ? isSideBarExpanded? 'bg-slate-600 text-slate-100': 'text-slate-100' : 'hover:text-slate-100'}`}>
                     <Trash2 size={22} />
                     {isSideBarExpanded && <span className="ml-3">Trash</span>}
                 </p>
