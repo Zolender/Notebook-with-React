@@ -1,6 +1,6 @@
 import { Clock3, Menu, NotebookText, PencilLine, Star, Trash2 } from "lucide-react";
 
-const SideBar = ({onAdd, setIsSideBarExpanded, isSideBarExpanded}) => {
+const SideBar = ({onAdd, setIsSideBarExpanded, isSideBarExpanded, setCurrentView, currentView}) => {
 
 
     return (
@@ -16,19 +16,27 @@ const SideBar = ({onAdd, setIsSideBarExpanded, isSideBarExpanded}) => {
             </button>
             <div className="text-slate-500 w-full pl-5 transition-all duration-300">
                 {isSideBarExpanded&& <p className="mb-3">CATEGORIES</p>}
-                <p className={` hover:text-slate-100 hover:cursor-pointer rounded-sm py-2 flex items-center gap-2 transition ${isSideBarExpanded? "pl-2 w-[70%] hover:bg-slate-500": ''}`}>
+                <p
+                    onClick={() => setCurrentView('all')}
+                    className={` hover:text-slate-100 hover:cursor-pointer rounded-sm py-2 flex items-center gap-2 transition ${isSideBarExpanded? "pl-2 w-[70%] hover:bg-slate-500": ''}`}>
                     <NotebookText size={22}/>
                     {isSideBarExpanded && <span className="ml-3">All Notes</span>}
                 </p>
-                <p className={` hover:text-slate-100 hover:cursor-pointer rounded-sm py-2 flex items-center gap-2 transition ${isSideBarExpanded? "pl-2 w-[70%] hover:bg-slate-500": ''}`}>
+                <p 
+                    onClick={() => setCurrentView('favorites')}
+                    className={` hover:text-slate-100 hover:cursor-pointer rounded-sm py-2 flex items-center gap-2 transition ${isSideBarExpanded? "pl-2 w-[70%] hover:bg-slate-500": ''}`}>
                     <Star size={22}/>
                     {isSideBarExpanded && <span className="ml-3">Favorite</span>}
                 </p>
-                <p className={` hover:text-slate-100 hover:cursor-pointer rounded-sm py-2 flex items-center gap-2 transition ${isSideBarExpanded? "pl-2 w-[70%] hover:bg-slate-500": ''}`}>
+                <p 
+                    onClick={() => setCurrentView('recents')}
+                    className={` hover:text-slate-100 hover:cursor-pointer rounded-sm py-2 flex items-center gap-2 transition ${isSideBarExpanded? "pl-2 w-[70%] hover:bg-slate-500": ''}`}>
                     <Clock3 size={22}/>
                     {isSideBarExpanded && <span className="ml-3">Recent</span>}
                 </p>
-                <p className={` hover:text-slate-100 hover:cursor-pointer rounded-sm py-2 flex items-center gap-2 transition ${isSideBarExpanded? "pl-2 w-[70%] hover:bg-slate-500": ''}`}>
+                <p 
+                    onClick={() => setCurrentView('deleted')}
+                    className={` hover:text-slate-100 hover:cursor-pointer rounded-sm py-2 flex items-center gap-2 transition ${isSideBarExpanded? "pl-2 w-[70%] hover:bg-slate-500": ''}`}>
                     <Trash2 size={22} />
                     {isSideBarExpanded && <span className="ml-3">Trash</span>}
                 </p>
