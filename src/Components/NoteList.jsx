@@ -1,10 +1,10 @@
 import {  Search, Wind } from "lucide-react";
 
 
-const NoteList = ({setSelectedNoteID, notes, selectedNoteID, searchQuery, setSearchQuery}) => {
+const NoteList = ({setSelectedNoteID, notes, selectedNoteID, searchQuery, setSearchQuery, selectNote}) => {
 
     return (
-        <div className="flex flex-col items-start w-72 px-3 py-5 gap-5 border-r-2 border-slate-400 text-slate-100">
+        <div className="flex flex-col items-start w-72 px-3 py-5 gap-5 border-r-2 border-slate-700 text-slate-100">
             <p className="text-xl font-bold">All Notes</p>
             <div className="relative bg-slate-600 w-full rounded-sm flex items-center px-2">
                 <Search size={22} className="" />
@@ -17,7 +17,7 @@ const NoteList = ({setSelectedNoteID, notes, selectedNoteID, searchQuery, setSea
             {notes.map((note) =>(
                 <div className={`p-3 rounded-md cursor-pointer w-full transition-all ${note.id === selectedNoteID ? 'bg-slate-700' : 'hover:bg-slate-800'}`}
                         key={note.id}
-                        onClick={()=> setSelectedNoteID(note.id)}
+                        onClick={()=> selectNote(note.id)}
                 >
                     <p className="font-bold truncate">{note.title}</p>
                     <p className="truncate text-slate-300 text-sm">{note.body || 'No content...'}</p>

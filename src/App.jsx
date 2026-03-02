@@ -14,7 +14,6 @@ function App() {
     localStorage.setItem('notes', JSON.stringify(notes))
   },[notes])
 
-  
 
   function addNotes(){
     const newNote = {
@@ -30,6 +29,15 @@ function App() {
 
     setNotes([newNote, ...cleanedNotes])
     setSelectedNoteID(newNote.id)
+  }
+
+  function selectNote(id){
+    const cleanedNotes = notes.filter(note=>{
+      if(note.id!==selectedNoteID)return true
+      return note.title.trim() !== "Untitled Note" || note.body.trim() !== "";
+    })
+    setNotes(cleanedNotes)
+    setSelectedNoteID(id)
   }
 
   function onToggleFavorite(id){
@@ -67,7 +75,7 @@ function App() {
   return (
     <div className='flex  w-full min-h-screen bg-slate-800'>
         <SideBar onAdd={addNotes} isSideBarExpanded={isSideBarExpanded} setIsSideBarExpanded={setIsSideBarExpanded} />
-        <NoteList notes={filteredNotes} searchQuery={searchQuery} setSearchQuery={setSearchQuery} selectedNoteID={selectedNoteID} setSelectedNoteID={setSelectedNoteID} />
+        <NoteList selectNote={selectNote} notes={filteredNotes} searchQuery={searchQuery} setSearchQuery={setSearchQuery} selectedNoteID={selectedNoteID} setSelectedNoteID={setSelectedNoteID} />
         <Editor selectedNote={getSelectedNote()} onUpdateNote={onUpdateNote} onDeleteNote={onDeleteNote} />
     </div>
   )
