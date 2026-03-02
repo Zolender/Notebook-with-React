@@ -4,31 +4,33 @@ const SideBar = ({onAdd, setIsSideBarExpanded, isSideBarExpanded}) => {
 
 
     return (
-        <div className={`${isSideBarExpanded? 'w-64': 'w-20'} border-r-2 border-slate-400 flex flex-col gap-5 justify-start items-center py-5 px-5 transition-all duration-300`}>
-            <button type="button">
-                <Menu size={35} onClick={()=>setIsSideBarExpanded(!isSideBarExpanded)} className="p-2 hover:bg-slate-700 rounded-lg self-end mb-4 text-slate-300"/>
+        <div className={`transition-all duration-50 border-r-2 border-slate-700 h-screen flex flex-col bg-slate-800 overflow-hidden ${isSideBarExpanded ? 'w-64' : 'w-16'}`}>            
+            <div className={`py-2 flex ${isSideBarExpanded? 'justify-start ml-4': 'justify-center'}`}>
+                <button type="button">
+                    <Menu size={35} onClick={()=>setIsSideBarExpanded(!isSideBarExpanded)} className="p-2 hover:bg-slate-700 rounded-lg self-end mb-4 text-slate-300 "/>
+                </button>
+            </div>
+            <button onClick={onAdd} type="button" className={`flex justify-center items-center mx-auto  text-center py-1 bg-blue-600 hover:bg-blue-700 active:bg-blue-900 hover:cursor-pointer rounded-lg border-none focus:outline-none transition-colors mb-2 text-slate-100 ${isSideBarExpanded? 'px-10 ': 'px-2'}`} >
+                <PencilLine size={22} />
+                {isSideBarExpanded && <span className="ml-3">New Note</span>}
             </button>
-            <button onClick={onAdd} type="button" className="flex justify-center items-center w-full text-center py-1 bg-blue-600 hover:bg-blue-700 active:bg-blue-900 hover:cursor-pointer rounded-lg border-none focus:outline-none transition-colors text-slate-100">
-                <PencilLine size={22} className="mx-3"/>
-                New Note
-            </button>
-            <div className="text-slate-500 w-full pl-5 ">
-                <p className="mb-3">CATEGORIES</p>
-                <p className="hover:bg-slate-500 hover:text-slate-100 hover:cursor-pointer pl-2 w-[70%] rounded-sm py-2 flex items-center gap-2 transition">
+            <div className="text-slate-500 w-full pl-5 transition-all duration-300">
+                {isSideBarExpanded&& <p className="mb-3">CATEGORIES</p>}
+                <p className={` hover:text-slate-100 hover:cursor-pointer rounded-sm py-2 flex items-center gap-2 transition ${isSideBarExpanded? "pl-2 w-[70%] hover:bg-slate-500": ''}`}>
                     <NotebookText size={22}/>
-                    All Notes
+                    {isSideBarExpanded && <span className="ml-3">All Notes</span>}
                 </p>
-                <p className="hover:bg-slate-500 hover:text-slate-100 hover:cursor-pointer pl-2 w-[70%] rounded-sm py-2 flex items-center gap-2 transition">
+                <p className={` hover:text-slate-100 hover:cursor-pointer rounded-sm py-2 flex items-center gap-2 transition ${isSideBarExpanded? "pl-2 w-[70%] hover:bg-slate-500": ''}`}>
                     <Star size={22}/>
-                    Favourites
+                    {isSideBarExpanded && <span className="ml-3">Favorite</span>}
                 </p>
-                <p className="hover:bg-slate-500 hover:text-slate-100 hover:cursor-pointer pl-2 w-[70%] rounded-sm py-2 flex items-center gap-2 transition">
+                <p className={` hover:text-slate-100 hover:cursor-pointer rounded-sm py-2 flex items-center gap-2 transition ${isSideBarExpanded? "pl-2 w-[70%] hover:bg-slate-500": ''}`}>
                     <Clock3 size={22}/>
-                    Recent
+                    {isSideBarExpanded && <span className="ml-3">Recent</span>}
                 </p>
-                <p className="hover:bg-slate-500 hover:text-slate-100 hover:cursor-pointer pl-2 w-[70%] rounded-sm py-2 flex items-center gap-2 transition">
-                    <Trash2 size={22}/>
-                    Trash
+                <p className={` hover:text-slate-100 hover:cursor-pointer rounded-sm py-2 flex items-center gap-2 transition ${isSideBarExpanded? "pl-2 w-[70%] hover:bg-slate-500": ''}`}>
+                    <Trash2 />
+                    {isSideBarExpanded && <span className="ml-3">Trash</span>}
                 </p>
             </div>
         </div>
