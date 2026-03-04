@@ -68,9 +68,21 @@ function App() {
   }
 
 
-  const filteredNotes = notes.filter(note =>(
-    note.title.toLowerCase().includes(searchQuery.toLowerCase()) || note.body.toLowerCase().includes(searchQuery.toLowerCase())
-  ))
+  const filteredNotes = notes.filter(note =>{
+    const matchesSearch = note.title.toLowerCase().includes(searchQuery.toLowerCase()) || note.body.toLowerCase().includes(searchQuery.toLowerCase())
+
+      if(currentView === 'favorites'){
+        return matchesSearch && note.isFavorite
+      }
+
+      if(currentView=== 'recent'){
+        const oneDayAgo = Date.now() - 24 * 60 * 60 * 1000
+        return matchesSearch && note.lastModified > oneDayAgo
+      }
+
+      return matchesSearch
+  
+})
 
   return (
     <div className='flex  w-full min-h-screen bg-slate-800'>
