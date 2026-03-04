@@ -74,9 +74,9 @@ function App() {
 
   return (
     <div className='flex  w-full min-h-screen bg-slate-800'>
-        <SideBar onAdd={addNotes} isSideBarExpanded={isSideBarExpanded} setIsSideBarExpanded={setIsSideBarExpanded} currentView={currentView} setCurrentView={setCurrentView} />
+        <SideBar onAdd={addNotes} isSideBarExpanded={isSideBarExpanded} setIsSideBarExpanded={setIsSideBarExpanded} currentView={currentView} onToggle={onToggleFavorite} />
         <NoteList selectNote={selectNote} notes={filteredNotes} searchQuery={searchQuery} setSearchQuery={setSearchQuery} selectedNoteID={selectedNoteID} setSelectedNoteID={setSelectedNoteID} />
-        <Editor selectedNote={getSelectedNote()} onUpdateNote={onUpdateNote} onDeleteNote={onDeleteNote} />
+        <Editor onToggleFavorite={onToggleFavorite} selectedNote={getSelectedNote()} onUpdateNote={onUpdateNote} onDeleteNote={onDeleteNote} />
     </div>
   )
 }

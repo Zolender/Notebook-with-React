@@ -1,6 +1,6 @@
 import { Share2, Star, Trash2 } from "lucide-react";
 
-const Editor = ({selectedNote, onUpdateNote, onDeleteNote}) => {
+const Editor = ({selectedNote, onUpdateNote, onDeleteNote, onToggleFavorite}) => {
 
     const editField = (field, value)=>{
         onUpdateNote({...selectedNote, [field]: value, lastModified: Date.now()})
@@ -20,7 +20,11 @@ const Editor = ({selectedNote, onUpdateNote, onDeleteNote}) => {
                     <span className="text-xs text-slate-400 uppercase tracking-widest">Last edited: {new Date(selectedNote.lastModified).toLocaleString()}</span>
                     <div className="flex gap-4 text-slate-400">
                         <Share2 size={22} className="hover:cursor-pointer" />
-                        <Star size={22} className="hover:cursor-pointer"/>
+                        <Star size={22} onClick={()=>{
+                            onToggleFavorite(selectedNote.id)
+                        }}
+                        className={`cursor-pointer transition-all ${selectedNote.isFavorite? 'fill-yellow-400': 'text-slate-400 hover:text-shadow-slate-300'}`}
+                        />
                         <Trash2 size={22} className="hover:cursor-pointer" onClick={()=> onDeleteNote(selectedNote.id)}/>
                     </div>
                 </div>
