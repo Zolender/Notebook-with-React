@@ -21,7 +21,8 @@ function App() {
       title: "Untitled Note",
       body: '',
       isFavorite: false,
-      lastModified: Date.now()
+      lastModified: Date.now(),
+      isDeleted: false
     }
     const cleanedNotes = notes.filter(note => 
     note.title.trim() !== "Untitled Note" || note.body.trim() !== ""
@@ -58,7 +59,7 @@ function App() {
   }
 
   function onDeleteNote(id){
-    const remainingNotes = notes.filter(note=> note.id!==id)
+    const remainingNotes = notes.map(note=> note.id===id? {...note, isDeleted: true}: note)
 
     setNotes(remainingNotes)
 
@@ -71,14 +72,18 @@ function App() {
   const filteredNotes = notes.filter(note =>{
     const matchesSearch = note.title.toLowerCase().includes(searchQuery.toLowerCase()) || note.body.toLowerCase().includes(searchQuery.toLowerCase())
 
-      if(currentView === 'favorites'){
+      if(currentView === 'Favorites'){
         return matchesSearch && note.isFavorite
       }
 
-      if(currentView=== 'recent'){
+      if(currentView=== 'Recent'){
         const oneDayAgo = Date.now() - 24 * 60 * 60 * 1000
         return matchesSearch && note.lastModified > oneDayAgo
       }
+
+      if(currentView==='Deleted')return matchesSearch && note.isDeleted
+
+      if(note.isDeleted)return false;
 
       return matchesSearch
   
@@ -86,8 +91,8 @@ function App() {
 
   return (
     <div className='flex  w-full min-h-screen bg-slate-800'>
-        <SideBar onAdd={addNotes} isSideBarExpanded={isSideBarExpanded} setIsSideBarExpanded={setIsSideBarExpanded} currentView={currentView} onToggle={onToggleFavorite} />
-        <NoteList selectNote={selectNote} notes={filteredNotes} searchQuery={searchQuery} setSearchQuery={setSearchQuery} selectedNoteID={selectedNoteID} setSelectedNoteID={setSelectedNoteID} />
+        <SideBar onAdd={addNotes} isSideBarExpanded={isSideBarExpanded} setIsSideBarExpanded={setIsSideBarExpanded} currentView={currentView} setCurrentView={setCurrentView} onToggle={onToggleFavorite} />
+        <NoteList currentView={currentView} selectNote={selectNote} notes={filteredNotes} searchQuery={searchQuery} setSearchQuery={setSearchQuery} selectedNoteID={selectedNoteID} setSelectedNoteID={setSelectedNoteID} />
         <Editor onToggleFavorite={onToggleFavorite} selectedNote={getSelectedNote()} onUpdateNote={onUpdateNote} onDeleteNote={onDeleteNote} />
     </div>
   )
