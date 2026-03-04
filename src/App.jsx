@@ -45,6 +45,18 @@ function App() {
     setNotes(notes.map(note=> note.id === id? {...note, isFavorite: !note.isFavorite}: note))
   }
 
+  function onRestorNote(id){
+    setNotes(notes.map(note=> note.id === id? {...note, isDeleted: false}: note))
+  }
+
+  function onPermanentDelete(id){
+    setNotes(notes.filter(note=> note.id!== id))
+
+    if(id === selectedNoteID){
+      setSelectedNoteID(null)
+    }
+  }
+
   function onUpdateNote(updatedNote){
     const updatedNoteArr = notes.map(note=>{
       if(note.id == updatedNote.id)return updatedNote
@@ -92,7 +104,7 @@ function App() {
   return (
     <div className='flex  w-full min-h-screen bg-slate-800'>
         <SideBar onAdd={addNotes} isSideBarExpanded={isSideBarExpanded} setIsSideBarExpanded={setIsSideBarExpanded} currentView={currentView} setCurrentView={setCurrentView} onToggle={onToggleFavorite} />
-        <NoteList currentView={currentView} selectNote={selectNote} notes={filteredNotes} searchQuery={searchQuery} setSearchQuery={setSearchQuery} selectedNoteID={selectedNoteID} setSelectedNoteID={setSelectedNoteID} />
+        <NoteList onPermanentDelete={onPermanentDelete} onRestorNote={onRestorNote} currentView={currentView} selectNote={selectNote} notes={filteredNotes} searchQuery={searchQuery} setSearchQuery={setSearchQuery} selectedNoteID={selectedNoteID} setSelectedNoteID={setSelectedNoteID} />
         <Editor onToggleFavorite={onToggleFavorite} selectedNote={getSelectedNote()} onUpdateNote={onUpdateNote} onDeleteNote={onDeleteNote} />
     </div>
   )
