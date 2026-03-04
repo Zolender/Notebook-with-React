@@ -16,21 +16,40 @@ const Editor = ({selectedNote, onUpdateNote, onDeleteNote, onToggleFavorite}) =>
     }else {
         return (
             <main className="flex-1 flex flex-col bg-slate-900 overflow-hidden">
-                <div className="flex items-center justify-between p-4 border-b border-slate-700">
-                    <span className="text-xs text-slate-400 uppercase tracking-widest">Last edited: {new Date(selectedNote.lastModified).toLocaleString()}</span>
-                    <div className="flex gap-4 text-slate-400">
-                        <Share2 size={22} className="hover:cursor-pointer" />
-                        <Star size={22} onClick={()=>{
-                            onToggleFavorite(selectedNote.id)
-                        }}
-                        className={`cursor-pointer transition-all ${selectedNote.isFavorite? 'fill-yellow-400': 'text-slate-400 hover:text-shadow-slate-300'}`}
-                        />
-                        <Trash2 size={22} className="hover:cursor-pointer" onClick={()=> onDeleteNote(selectedNote.id)}/>
+                
+                {!selectedNote.isDeleted && 
+                    <div className="flex items-center justify-between p-4 border-b border-slate-700">
+                        <span className="text-xs text-slate-400 uppercase tracking-widest">Last edited: {new Date(selectedNote.lastModified).toLocaleString()}</span>
+                        <div className="flex gap-4 text-slate-400">
+                            <Share2 size={22} className="hover:cursor-pointer" />
+                            <Star size={22} onClick={()=>{
+                                onToggleFavorite(selectedNote.id)
+                            }}
+                            className={`cursor-pointer transition-all ${selectedNote.isFavorite? 'fill-yellow-400': 'text-slate-400 hover:text-shadow-slate-300'}`}
+                            />
+                            <Trash2 size={22} className="hover:cursor-pointer" onClick={()=> onDeleteNote(selectedNote.id)}/>
+                        </div>
                     </div>
-                </div>
+                }
+
+
                 <div className="flex-1 flex flex-col p-8 md:p-12 max-w-4xl mx-auto w-full">
-                    <input type="text" placeholder="Note Title" value={selectedNote.title} onChange={(e)=> editField('title', e.target.value )} className="bg-transparent text-4xl font-bold text-slate-100 outline-none placeholder::text-slate-700 mb-6"/>
-                    <textarea placeholder="Type anything..." value={selectedNote.body} onChange={(e)=> editField('body', e.target.value )}  className="flex-1 bg-transparent text-lg text-slate-200 outline-none resize-none placeholder:text-slate-700 leading-relaxed"></textarea>
+                    {
+                        selectedNote.isDeleted?(
+                            <div className="flex flex-col h-full">
+                                <div className="bg-amber-900/30 text-amber-200 p-3 text-center rounded-lg text-sm border border-amber-800/50 mb-8">
+                                    This note is in the trash. Restore it from the list to continue editing.
+                                </div>
+                                <h1 className="text-4xl font-bold text-slate-200 opacity-50 mb-6">{selectedNote.title}</h1>
+                                <p className="text-lg text-slate-300 opacity-50 leading-relaxed whitespace-pre-wrap">{selectedNote.body}</p>
+                            </div>
+                        ):(
+                            <>
+                                <input type="text" placeholder="Note Title" value={selectedNote.title} onChange={(e)=>editField('title',e.target.value)} className="bg-transparent text-4xl font-bold text-slate-100 outline-none placeholder:text-slate-700 mb-6" />
+                                <textarea placeholder="Type anything..." value={selectedNote.body} onChange={(e)=> editField('body', e.target.value)} className="flex-1 bg-transparent text-lg text-slate-200 outline-none resize-none placeholder:text-slate-700 leading-relaxed" />
+                            </>
+                        )
+                    }
                 </div>
             </main>
         );
