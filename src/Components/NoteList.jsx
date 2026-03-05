@@ -32,7 +32,7 @@ const NoteList = ({onPermanentDelete,onRestorNote,currentView, notes, selectedNo
                                 e.stopPropagation()
                                 onRestorNote(note.id)
                             }}
-                            className="p-1 hover:bg-slate-600 rounded text-green-400 transform-colors"
+                            className="p-1 hover:bg-slate-600 rounded text-gray-400 transform-colors"
                             title="Restore"
                             >
                                 <RotateCcw size={14}/>
@@ -42,7 +42,7 @@ const NoteList = ({onPermanentDelete,onRestorNote,currentView, notes, selectedNo
                                 onPermanentDelete(note.id)
                             }}
                             title="Delete Permanently"
-                            className="p-1 hover:bg-slate-600 rounded text-green-400 transform-colors"
+                            className="p-1 hover:bg-slate-600 rounded text-gray-400 transform-colors"
 
                             >
                                 <Trash2 size={14}/>
